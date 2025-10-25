@@ -157,152 +157,164 @@ class _ParentDashboardState extends State<ParentDashboard> {
 
             // Content
             SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: AppSizes.spaceL),
+              child: SafeArea(
+                bottom: true,
+                child: Padding(
+                  // Ensure there's extra bottom padding to avoid bottom overflow on
+                  // small devices or when system UI (nav bars) are present.
+                  padding: EdgeInsets.only(
+                    bottom:
+                        MediaQuery.of(context).viewPadding.bottom +
+                        AppSizes.padding,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: AppSizes.spaceL),
 
-                  // Quick Overview Cards with Modern Design
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSizes.padding,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Quick Overview',
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textPrimary,
-                              ),
+                      // Quick Overview Cards with Modern Design
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.padding,
                         ),
-                        const SizedBox(height: AppSizes.space),
-                        // Grid of 4 Overview Cards
-                        GridView.count(
-                          crossAxisCount: 2,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: AppSizes.spaceM,
-                          crossAxisSpacing: AppSizes.spaceM,
-                          childAspectRatio: 1.5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _ModernOverviewCard(
-                              title: AppStrings.attendance,
-                              value: '95%',
-                              icon: Icons.calendar_today_rounded,
-                              gradientColors: const [
-                                AppColors.success,
-                                Color(0xFF34D399),
-                              ],
-                              subtitle: 'This month',
+                            Text(
+                              'Quick Overview',
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.textPrimary,
+                                  ),
                             ),
-                            _ModernOverviewCard(
-                              title: 'Performance',
-                              value: '85%',
-                              icon: Icons.trending_up_rounded,
-                              gradientColors: const [
-                                AppColors.info,
-                                Color(0xFF60A5FA),
+                            const SizedBox(height: AppSizes.space),
+                            // Grid of 4 Overview Cards
+                            GridView.count(
+                              crossAxisCount: 2,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              mainAxisSpacing: AppSizes.spaceM,
+                              crossAxisSpacing: AppSizes.spaceM,
+                              childAspectRatio: 1.5,
+                              children: [
+                                _ModernOverviewCard(
+                                  title: AppStrings.attendance,
+                                  value: '95%',
+                                  icon: Icons.calendar_today_rounded,
+                                  gradientColors: const [
+                                    AppColors.success,
+                                    Color(0xFF34D399),
+                                  ],
+                                  subtitle: 'This month',
+                                ),
+                                _ModernOverviewCard(
+                                  title: 'Performance',
+                                  value: '85%',
+                                  icon: Icons.trending_up_rounded,
+                                  gradientColors: const [
+                                    AppColors.info,
+                                    Color(0xFF60A5FA),
+                                  ],
+                                  subtitle: 'Average score',
+                                  showBadge: false,
+                                ),
+                                _ModernOverviewCard(
+                                  title: AppStrings.fees,
+                                  value: '₹5,000',
+                                  icon: Icons.payments_rounded,
+                                  gradientColors: const [
+                                    AppColors.warning,
+                                    Color(0xFFFBBF24),
+                                  ],
+                                  subtitle: 'Due on 15 Oct',
+                                  showBadge: true,
+                                  badgeText: 'DUE',
+                                ),
+                                _ModernOverviewCard(
+                                  title: 'Messages',
+                                  value: '3',
+                                  icon: Icons.chat_bubble_rounded,
+                                  gradientColors: const [
+                                    Color(0xFF8B5CF6),
+                                    Color(0xFFA78BFA),
+                                  ],
+                                  subtitle: 'New',
+                                  showBadge: true,
+                                  badgeText: 'NEW',
+                                ),
                               ],
-                              subtitle: 'Average score',
-                              showBadge: false,
-                            ),
-                            _ModernOverviewCard(
-                              title: AppStrings.fees,
-                              value: '₹5,000',
-                              icon: Icons.payments_rounded,
-                              gradientColors: const [
-                                AppColors.warning,
-                                Color(0xFFFBBF24),
-                              ],
-                              subtitle: 'Due on 15 Oct',
-                              showBadge: true,
-                              badgeText: 'DUE',
-                            ),
-                            _ModernOverviewCard(
-                              title: 'Messages',
-                              value: '3',
-                              icon: Icons.chat_bubble_rounded,
-                              gradientColors: const [
-                                Color(0xFF8B5CF6),
-                                Color(0xFFA78BFA),
-                              ],
-                              subtitle: 'New',
-                              showBadge: true,
-                              badgeText: 'NEW',
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
 
-                  const SizedBox(height: AppSizes.spaceXXL),
+                      const SizedBox(height: AppSizes.spaceXXL),
 
-                  // Action Grid
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSizes.padding,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppStrings.quickActions,
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textPrimary,
-                              ),
+                      // Action Grid
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.padding,
                         ),
-                        const SizedBox(height: AppSizes.space),
-                        GridView.count(
-                          crossAxisCount: 3,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: AppSizes.spaceM,
-                          crossAxisSpacing: AppSizes.spaceM,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _ParentActionItem(
-                              icon: Icons.calendar_today_rounded,
-                              label: AppStrings.attendance,
-                              color: AppColors.success,
+                            Text(
+                              AppStrings.quickActions,
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.textPrimary,
+                                  ),
                             ),
-                            _ParentActionItem(
-                              icon: Icons.insights_rounded,
-                              label: AppStrings.performance,
-                              color: AppColors.info,
-                            ),
-                            _ParentActionItem(
-                              icon: Icons.payments_rounded,
-                              label: AppStrings.fees,
-                              color: AppColors.warning,
-                            ),
-                            _ParentActionItem(
-                              icon: Icons.chat_bubble_rounded,
-                              label: AppStrings.messages,
-                              color: const Color(0xFF8B5CF6),
-                            ),
-                            _ParentActionItem(
-                              icon: Icons.school_rounded,
-                              label: AppStrings.schoolInfo,
-                              color: AppColors.secondary,
-                            ),
-                            _ParentActionItem(
-                              icon: Icons.report_rounded,
-                              label: AppStrings.complaints,
-                              color: AppColors.error,
+                            const SizedBox(height: AppSizes.space),
+                            GridView.count(
+                              crossAxisCount: 3,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              mainAxisSpacing: AppSizes.spaceM,
+                              crossAxisSpacing: AppSizes.spaceM,
+                              children: [
+                                _ParentActionItem(
+                                  icon: Icons.calendar_today_rounded,
+                                  label: AppStrings.attendance,
+                                  color: AppColors.success,
+                                ),
+                                _ParentActionItem(
+                                  icon: Icons.insights_rounded,
+                                  label: AppStrings.performance,
+                                  color: AppColors.info,
+                                ),
+                                _ParentActionItem(
+                                  icon: Icons.payments_rounded,
+                                  label: AppStrings.fees,
+                                  color: AppColors.warning,
+                                ),
+                                _ParentActionItem(
+                                  icon: Icons.chat_bubble_rounded,
+                                  label: AppStrings.messages,
+                                  color: const Color(0xFF8B5CF6),
+                                ),
+                                _ParentActionItem(
+                                  icon: Icons.school_rounded,
+                                  label: AppStrings.schoolInfo,
+                                  color: AppColors.secondary,
+                                ),
+                                _ParentActionItem(
+                                  icon: Icons.report_rounded,
+                                  label: AppStrings.complaints,
+                                  color: AppColors.error,
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
 
-                  const SizedBox(height: AppSizes.spaceL),
-                ],
+                      const SizedBox(height: AppSizes.spaceL),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
